@@ -18,7 +18,7 @@ export interface IGridHeaderSelectableContext {
 })
 export class SelectHeaderComponent implements OnInit, OnDestroy, ICellRenderer {
   private context: IGridHeaderSelectableContext;
-  private selected: boolean;
+  public selected: boolean;
 
   get classList(): string {
     return R.compose(

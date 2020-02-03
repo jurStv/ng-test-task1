@@ -24,7 +24,7 @@ export interface IGridToolPanelContext {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolPanelComponent implements OnInit, OnDestroy, IToolPanel {
-  private selectedModeOn: boolean;
+  public selectedModeOn: boolean;
   public stats: IToolPanelStats;
 
   get classList(): string {
