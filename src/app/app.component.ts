@@ -59,7 +59,7 @@ export class AppComponent implements OnInit, IGridHeaderSelectableContext, IGrid
     },
     { headerName: 'Video Title', field: 'title', colId: 'title' },
     { headerName: 'Description', field: 'description', colId: 'description', suppressMenu: true, },
-    { headerName: '', field: 'thumbnailUrl', cellRenderer: 'imageRenderer', colId: 'thumbnail', suppressMenu: true,},
+    { headerName: '', field: 'thumbnailUrl', cellRenderer: 'imageRenderer', colId: 'thumbnail', suppressMenu: true },
     {
       headerName: 'Published on',
       field: 'publishedAt',
