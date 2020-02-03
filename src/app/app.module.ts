@@ -9,7 +9,10 @@ import { environment, Environment } from '@app/env';
 
 import { YoutubeService } from './services';
 import { AppComponent } from './app.component';
-import { ComponentsModule, ImageCellComponent, DateCellComponent, ToolPanelComponent, SelectHeaderComponent } from './components';
+import {
+  ComponentsModule, ImageCellComponent, DateCellComponent,
+  ToolPanelComponent, SelectHeaderComponent, LinkCellComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -17,7 +20,13 @@ import { ComponentsModule, ImageCellComponent, DateCellComponent, ToolPanelCompo
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AgGridModule.withComponents([ImageCellComponent, DateCellComponent, ToolPanelComponent, SelectHeaderComponent]),
+    AgGridModule.withComponents([
+      ImageCellComponent,
+      DateCellComponent,
+      ToolPanelComponent,
+      SelectHeaderComponent,
+      LinkCellComponent,
+    ]),
     ComponentsModule,
   ],
   declarations: [

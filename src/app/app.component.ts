@@ -10,7 +10,7 @@ import { YoutubeService } from './services';
 import { INITIAL_SEARCH_VALUE, YOUTUBE_WATCH_URL, INITIAL_SELCTION_VALUE, INITIAL_SELCTION_MODE_ON_VALUE } from './app.constants';
 import { SearchResult } from './interfaces';
 import {
-  ImageCellComponent, DateCellComponent, ToolPanelComponent,
+  ImageCellComponent, DateCellComponent, ToolPanelComponent, LinkCellComponent,
   SelectHeaderComponent, IGridHeaderSelectableContext, IGridToolPanelContext,
   TOOL_PANEL_CONTEXT_TOKEN,
 } from './components';
@@ -57,7 +57,7 @@ export class AppComponent implements OnInit, IGridHeaderSelectableContext, IGrid
       hide: !INITIAL_SELCTION_MODE_ON_VALUE,
       suppressMenu: true,
     },
-    { headerName: 'Video Title', field: 'title', colId: 'title' },
+    { headerName: 'Video Title', field: 'title', colId: 'title', cellRenderer: 'linkRenderer', },
     { headerName: 'Description', field: 'description', colId: 'description', suppressMenu: true, },
     { headerName: '', field: 'thumbnailUrl', cellRenderer: 'imageRenderer', colId: 'thumbnail', suppressMenu: true },
     {
@@ -96,6 +96,7 @@ export class AppComponent implements OnInit, IGridHeaderSelectableContext, IGrid
     this.frameworkComponents = {
       imageRenderer: ImageCellComponent,
       dateRenderer: DateCellComponent,
+      linkRenderer: LinkCellComponent,
       toolPanel: ToolPanelComponent,
       selectHeaderRenderer: SelectHeaderComponent,
     };
