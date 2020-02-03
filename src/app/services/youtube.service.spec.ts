@@ -29,23 +29,49 @@ describe('YoutubeService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should get videos', inject(
+  it('should get videos data', inject(
     [HttpTestingController, YoutubeService],
     (httpMock: HttpTestingController, youtubeService: YoutubeService) => {
       youtubeService.searchVideos(searchQuery).subscribe((videosResponse) => {
         expect(videosResponse).toEqual(mockResponse);
       });
 
-      const mockReq = httpMock.expectOne(req => req.method === 'GET' && req.url === `${environment.google.baseUrl}/search`);
-
+      const mockReq = httpMock.expectOne(
+        req => req.method === 'GET' && req.url === `${environment.google.baseUrl}/search`
+      );
       expect(mockReq.cancelled).toBeFalsy();
       expect(mockReq.request.responseType).toEqual('json');
+
+      mockReq.flush(mockResponse);
+
+      httpMock.verify();
+    }
+  ));
+
+  it('should make request with valid parameters', inject(
+    [HttpTestingController, YoutubeService],
+    (httpMock: HttpTestingController, youtubeService: YoutubeService) => {
+      youtubeService.searchVideos(searchQuery).subscribe();
+
+      const mockReq = httpMock.expectOne(
+        req => req.method === 'GET' && req.url === `${environment.google.baseUrl}/search`
+      );
+
       expect(mockReq.request.params.get('key')).toEqual(environment.google.apiKey);
       expect(mockReq.request.params.get('maxResults')).toEqual('50');
       expect(mockReq.request.params.get('part')).toEqual('snippet');
-      expect(mockReq.request.params.get('q')).toEqual(searchQuery);
 
-      mockReq.flush(mockResponse);
+      httpMock.verify();
+    }
+  ));
+  it('should make request with valid search query', inject(
+    [HttpTestingController, YoutubeService],
+    (httpMock: HttpTestingController, youtubeService: YoutubeService) => {
+      youtubeService.searchVideos(searchQuery).subscribe();
+
+      const mockReq = httpMock.expectOne(req => req.method === 'GET' && req.url === `${environment.google.baseUrl}/search`);
+
+      expect(mockReq.request.params.get('q')).toEqual(searchQuery);
 
       httpMock.verify();
     }
