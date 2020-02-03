@@ -1,0 +1,8 @@
+<div class="tool-panel__checkbox" (click)="toggleCheck()">
+  <span [attr.class]="classList" unselectable="on"></span>
+  <span>Toggle selction mode</span>
+</div>
+<div *ngIf="stats">
+  <p>Selected rows count: {{ stats.selected }}</p>
+  <p>Total rows count: {{ stats.total }}</p>
+</div>

@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  margin: 10px;
+}
+
+.tool-panel {
+  &__checkbox {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+
+    .ag-icon {
+      width: 17px;
+      margin-right: 5px;
+    }
+  }
+}
