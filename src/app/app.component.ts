@@ -69,16 +69,34 @@ export class AppComponent implements OnInit, IGridHeaderSelectableContext, IGrid
       suppressMenu: true,
     },
   ];
-  public rowData: Observable<IVideoGridRowItem[]>;
-  public frameworkComponents;
-  public context;
-  public sideBar;
-  public rowSelection;
+  public frameworkComponents = {
+    imageRenderer: ImageCellComponent,
+    dateRenderer: DateCellComponent,
+    linkRenderer: LinkCellComponent,
+    toolPanel: ToolPanelComponent,
+    selectHeaderRenderer: SelectHeaderComponent,
+  };
+  public sideBar = {
+    toolPanels: [
+      {
+        id: 'customTools',
+        labelDefault: 'Custom Tools',
+        labelKey: 'customTools',
+        iconKey: 'custom-tools',
+        toolPanel: 'toolPanel'
+      }
+    ],
+    defaultToolPanel: 'toolPanel'
+  };
+  public rowSelection = 'multiple';
   public modules = AllModules;
   public selected$ = new BehaviorSubject<boolean>(INITIAL_SELCTION_VALUE);
   public statsChanges$ = new BehaviorSubject({ total: 0, selected: 0 });
   public initialSelectionModeValue = INITIAL_SELCTION_MODE_ON_VALUE;
   public icons = { 'custom-tools': '<span class="ag-icon ag-icon-custom-tools"></span>' };
+  public context;
+  public rowData: Observable<IVideoGridRowItem[]>;
+
 
   constructor(
     private readonly youtube: YoutubeService,
@@ -93,27 +111,7 @@ export class AppComponent implements OnInit, IGridHeaderSelectableContext, IGrid
       pluck('items'),
       map<SearchResult[], IVideoGridRowItem[]>(R.map(toVideoGridRowItem)),
     );
-    this.frameworkComponents = {
-      imageRenderer: ImageCellComponent,
-      dateRenderer: DateCellComponent,
-      linkRenderer: LinkCellComponent,
-      toolPanel: ToolPanelComponent,
-      selectHeaderRenderer: SelectHeaderComponent,
-    };
     this.context = { componentParent: this };
-    this.sideBar = {
-      toolPanels: [
-        {
-          id: 'customTools',
-          labelDefault: 'Custom Tools',
-          labelKey: 'customTools',
-          iconKey: 'custom-tools',
-          toolPanel: 'toolPanel'
-        }
-      ],
-      defaultToolPanel: 'toolPanel'
-    };
-    this.rowSelection = 'multiple';
   }
 
   getContextMenuItems(params) {
